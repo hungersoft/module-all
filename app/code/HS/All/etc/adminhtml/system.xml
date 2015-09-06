@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="hungersoft" translate="label" sortOrder="1000">
+            <label>Hungersoft Extensions</label>
+        </tab>
+    </system>
+</config>
