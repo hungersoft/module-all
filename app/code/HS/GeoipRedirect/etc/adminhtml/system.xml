@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="geoip_redirect" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Geoip Redirect</label>
+            <tab>hungersoft</tab>
+            <resource>HS_GeoipRedirect::geoip_redirect</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable GeoIP Redirect</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="restriction" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Restrictions</label>
+                <field id="apply_to" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Apply Redirect Action To</label>
+                    <source_model>HS\GeoipRedirect\Model\Config\Source\RestrictUrlOption</source_model>
+                </field>
+                <field id="url" translate="label comment" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>URLs</label>
+                    <frontend_model>HS\GeoipRedirect\Block\System\Config\Form\Field\Regexceptions</frontend_model>
+                    <backend_model>HS\GeoipRedirect\Model\Backend\Exceptions</backend_model>
+                    <depends>
+                        <field id="apply_to">specified_urls</field>
+                    </depends>
+                </field>
+                <field id="ignore_user_agent" translate="label comment" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ignore User Agents</label>
+                    <frontend_model>HS\GeoipRedirect\Block\System\Config\Form\Field\Regexceptions</frontend_model>
+                    <backend_model>HS\GeoipRedirect\Model\Backend\Exceptions</backend_model>
+                    <comment>
+                        <![CDATA[Ignore certain user agents such as search engine bots from redirecting. Eg: googlebot, yahoo etc.]]>
+                    </comment>
+                </field>
+                <field id="ignore_ip" translate="label comment" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ignore IPs</label>
+                    <frontend_model>HS\GeoipRedirect\Block\System\Config\Form\Field\Regexceptions</frontend_model>
+                    <backend_model>HS\GeoipRedirect\Model\Backend\Exceptions</backend_model>
+                    <comment>
+                        <![CDATA[Ignore certain IPs from redirecting.]]>
+                    </comment>
+                </field>
+            </group>
+            <group id="store_view_redirect" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Country to Store View Redirect</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Country to Store View Redirection</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="country" translate="label" type="multiselect" sortOrder="1" showInDefault="0" showInWebsite="0" showInStore="1">
+                    <label>Available Countries</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Country</source_model>
+                </field>
+            </group>
+            <group id="url_redirect" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Country to URL Redirect</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Country to URL Redirection</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="country_url_map" translate="label comment" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Country to URL Mapping</label>
+                    <frontend_model>HS\GeoipRedirect\Block\System\Config\Form\Field\CountryUrlMap</frontend_model>
+                    <backend_model>HS\GeoipRedirect\Model\Backend\CountryUrlMap</backend_model>
+                </field>
+            </group>
+            <group id="currency_switch" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Country to Currency Switch</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Country to Currency Switch</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="country_currency_map" translate="label comment" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Country to Currency Mapping</label>
+                    <frontend_model>HS\GeoipRedirect\Block\System\Config\Form\Field\CountryCurrencyMap</frontend_model>
+                    <backend_model>HS\GeoipRedirect\Model\Backend\CountryCurrencyMap</backend_model>
+                </field>
+            </group>
+            <group id="global_redirect" translate="label" type="label" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Global Redirect</label>
+                <field id="url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Url</label>
+                    <comment>
+                        <![CDATA[Global redirect url if none of the above conditions match.]]>
+                    </comment>
+                </field>
+            </group>
+            <group id="database" translate="label" type="label" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>GeoIP Database</label>
+                <field id="status" translate="label" type="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>GeoIP Database Downloaded</label>
+                    <frontend_model>HS\GeoipRedirect\Block\System\Config\Form\Field\Database\Status</frontend_model>
+                </field>
+                <field id="synchronize" translate="label" type="button" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>HS\GeoipRedirect\Block\System\Config\Form\Field\Database\Synchronize</frontend_model>
+                    <comment>
+                        <![CDATA[Synchronizing too often can lead to being banned for several hours.]]>
+                    </comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

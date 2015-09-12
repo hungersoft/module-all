@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="HS\GeoipRedirect\Model\Observer">
+        <arguments>
+            <argument name="helper" xsi:type="object">HS\GeoipRedirect\Helper\Data</argument>
+        </arguments>
+    </type>
+<!--    <type name="HS\GeoipRedirect\Model\Geoip\Database">
+        <arguments>
+            <argument name="fileSystem" xsi:type="object">Magento\Framework\Filesystem</argument>
+        </arguments>
+    </type>-->
+</config>
