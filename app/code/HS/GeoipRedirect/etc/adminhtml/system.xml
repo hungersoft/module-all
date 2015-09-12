@@ -11,6 +11,10 @@
                     <label>Enable GeoIP Redirect</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="redirect_once" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Redirect only once</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
             <group id="restriction" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Restrictions</label>

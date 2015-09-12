@@ -117,9 +117,8 @@ class Observer
         $controller = $observer->getControllerAction();
         $country = $this->geoip->getCountry();
         
-        if($this->session->getIsGeoipRedirected()) {
-            // comment out next line. used just for testing purposes.
-            $this->session->setIsGeoipRedirected(false);
+        if($this->session->getIsGeoipRedirected()
+            && $this->helper->isRedirectOnce()) {
             return $this;
         }
         
@@ -165,31 +164,29 @@ class Observer
         }
         
         // Redirect to store for the current country if applicable or redirect to global url.
-        if ( ! $this->helper->isEnabledCountryToStoreView()) {
-            $url = $this->helper->getGlobalRedirectUrl();
-            if( ! $url) {
-                return $this;
-            }
-            $controller->getResponse()->setRedirect($url)->sendResponse();
-            exit;
-        }
+        if ($this->helper->isEnabledCountryToStoreView()) {
+            foreach ($this->helper->getStores() as $store) {
+                if( ! $store->getIsActive()) {
+                    continue;
+                }
+                            
+                $allowedCountries = $this->helper->getAllowedCountries($store);
+                if( ! in_array($country, $allowedCountries)) {
+                    continue;
+                }
                 
-        foreach ($this->helper->getStores() as $store) {
-            if( ! $store->getIsActive()) {
-                continue;
-            }
-                        
-            $allowedCountries = $this->helper->getAllowedCountries($store);
-            if( ! in_array($country, $allowedCountries)) {
-                continue;
-            }
-            
-            $this->session->setIsGeoipRedirected(true);
-            $url = $store->getCurrentUrl();
-            $controller->getResponse()->setRedirect($url)->sendResponse();
-            exit;
-        }  
+                $this->session->setIsGeoipRedirected(true);
+                $url = $store->getCurrentUrl();
+                $controller->getResponse()->setRedirect($url)->sendResponse();
+                exit;
+            } 
+        }
         
-        return $this;         
+        $url = $this->helper->getGlobalRedirectUrl();
+        if( ! $url) {
+            return $this;
+        }        
+        $controller->getResponse()->setRedirect($url)->sendResponse();
+        exit;          
     }
 }

@@ -5,6 +5,7 @@ namespace HS\GeoipRedirect\Helper;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     const CONFIG_ENABLED = 'geoip_redirect/general/enabled';
+    const CONFIG_REDIRECT_ONCE = 'geoip_redirect/general/redirect_once';
     const CONFIG_APPLY_REDIRECT_TO = 'geoip_redirect/restriction/apply_to';
     const CONFIG_REDIRECT_ACTION_URL = 'geoip_redirect/restriction/url';
     const CONFIG_IGNORE_USER_AGENTS = 'geoip_redirect/restriction/ignore_user_agent';
@@ -294,6 +295,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $this->_storeId
         );
+    }
+    
+    public function isRedirectOnce() 
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::CONFIG_REDIRECT_ONCE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $this->_storeId
+        );   
     }
     
     /**
