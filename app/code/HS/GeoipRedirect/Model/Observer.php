@@ -17,9 +17,7 @@ class Observer
     protected $geoip;
     
     protected $session;
-    
-    protected $redirect;
-    
+        
     protected $canRedirect;
     
     protected $eventManager;
@@ -30,7 +28,6 @@ class Observer
         \HS\GeoipRedirect\Helper\Data $helper,
         \HS\GeoipRedirect\Model\Geoip\Country $geoip,
         \Magento\Customer\Model\Session $session,
-        \Magento\Framework\App\Response\RedirectInterface $redirect,
         \Magento\Framework\Event\ManagerInterface $eventManager
     ) {
         $this->action = $action;
@@ -38,7 +35,6 @@ class Observer
         $this->helper = $helper;
         $this->geoip = $geoip;
         $this->session = $session;
-        $this->redirect = $redirect;
         $this->eventManager = $eventManager;
         
         $this->geoip->addAllowedCountry(
