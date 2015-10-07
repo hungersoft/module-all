@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Cron/etc/crontab.xsd">
+    <group id="default">
+        <job name="hs_all_confirm_register" instance="\HS\All\Model\Cron\Register" method="register">
+            <schedule>0 * * * *</schedule>
+        </job>
+    </group>
+</config>
