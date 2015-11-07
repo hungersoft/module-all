@@ -4,6 +4,9 @@ namespace HS\All\Helper;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    /**
+     * Extension registration URL.
+     */
     const EXTENSION_REGISTER_URL = 'https://hungersoft.com/register-module.php';
 
     /**
