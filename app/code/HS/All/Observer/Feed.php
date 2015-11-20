@@ -1,12 +1,10 @@
 <?php
-namespace HS\All\Model\Feed;
 
-/**
- * Class Observer
- *
- * @package HS\All\Model
- */
-class Observer
+namespace HS\All\Observer;
+
+use Magento\Framework\Event\ObserverInterface;
+
+class Feed implements ObserverInterface
 {
     /**
      * @var \Magento\AdminNotification\Model\FeedFactory
@@ -38,7 +36,7 @@ class Observer
      * @param \Magento\Framework\Event\Observer $observer
      * @return void
      */
-    public function preDispatch(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer)
     {
         if ($this->_backendAuthSession->isLoggedIn()) {
             $feedModel = $this->_feedFactory->create();
