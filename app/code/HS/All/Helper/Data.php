@@ -7,7 +7,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * Extension registration URL.
      */
-    const EXTENSION_REGISTER_URL = 'https://hungersoft.com/register-module.php';
+    const EXTENSION_REGISTER_URL = 'https://www.hungersoft.com/register-module.php';
 
     /**
      * @var \Magento\Store\Model\StoreManager
