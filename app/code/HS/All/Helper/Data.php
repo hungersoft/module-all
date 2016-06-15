@@ -62,7 +62,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             ]);
 
             $this->session->setData($sessionDataKey, true);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
