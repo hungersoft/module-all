@@ -18,6 +18,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Backend\Model\Session
      */
     protected $session;
+    
+    /**
+     * @var \Magento\Framework\HTTP\Client\Curl
+     */
+    protected $curl;
 
     /**
      * @param \Magento\Framework\App\Helper\Context $context
@@ -26,10 +31,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Store\Model\StoreManager $storeManager,
-        \Magento\Backend\Model\Session $session
+        \Magento\Backend\Model\Session $session,
+        \Magento\Framework\HTTP\Client\Curl $curl
     ) {
         $this->storeManager = $storeManager;
         $this->session = $session;
+        $this->curl = $curl;
 
         parent::__construct($context);
     }
@@ -52,9 +59,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             return;
         }
 
-        $curl = new \Magento\Framework\HTTP\Client\Curl();
         try {
-            $curl->post(self::EXTENSION_REGISTER_URL, [
+            $this->curl->post(self::EXTENSION_REGISTER_URL, [
                 'module'   => $module,
                 'version'  => $version,
                 'site_url' => $this->getAllUrls(),
