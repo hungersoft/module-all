@@ -12,17 +12,17 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @var \Magento\Store\Model\StoreManager
      */
-    protected $storeManager;
+    private $storeManager;
 
     /**
      * @var \Magento\Backend\Model\Session
      */
-    protected $session;
+    private $session;
     
     /**
      * @var \Magento\Framework\HTTP\Client\Curl
      */
-    protected $curl;
+    private $curl;
 
     /**
      * @param \Magento\Framework\App\Helper\Context $context
@@ -50,12 +50,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function register($module, $version, $type = 'install')
     {
-        if(null === $module || null === $version) {
+        if (null === $module || null === $version) {
             return;
         }
 
         $sessionDataKey = 'is_registered_' . $module;
-        if($this->session->getData($sessionDataKey)) {
+        if ($this->session->getData($sessionDataKey)) {
             return;
         }
 
@@ -69,7 +69,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
             $this->session->setData($sessionDataKey, true);
         } catch (\Exception $e) {
-
         }
     }
 
@@ -82,7 +81,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $urls = [];
         $stores = $this->storeManager->getStores(false);
-        foreach($stores as $store) {
+        foreach ($stores as $store) {
             $urls[] = $store->getBaseUrl();
         }
 
