@@ -9,7 +9,7 @@ This is the base [Hungersoft](https://www.hungersoft.com) extension which is req
 
 ```sh
 composer config repositories.hs-module-all vcs https://github.com/hungersoft/module-all.git
-composer require hs/module-all
+composer require hs/module-all:dev-master
 
 php bin/magento module:enable HS_All
 php bin/magento setup:upgrade
