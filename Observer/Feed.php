@@ -38,10 +38,13 @@ class Feed implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        if ($this->backendAuthSession->isLoggedIn()) {
-            $feedModel = $this->feedFactory->create();
-            /** @var $feedModel \HS\All\Model\Feed **/
-            $feedModel->checkUpdate();
+        try {
+            if ($this->backendAuthSession->isLoggedIn()) {
+                $feedModel = $this->feedFactory->create();
+                /** @var $feedModel \HS\All\Model\Feed **/
+                $feedModel->checkUpdate();
+            }
+        } catch (\Exception $e) {
         }
     }
 }
